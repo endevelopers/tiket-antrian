@@ -113,22 +113,7 @@
                                     <button type="button" class="btn btn-sm d-none d-lg-inline-block btn-warning ml-auto"  data-toggle="modal" data-target="#staticBackdrop">
                                     <i class="fa fa-check"></i> Done
                                     </button>
-                                </div>
-                                <div class="mt-5">
-                                  <!-- <a href="#" class="btn btn-white my-2" data-scroll-to data-scroll-to-offset="85" id="startPause" onClick="startPause()">Start</a> 
-                                  <a href="#" class="btn btn-outline-white my-2" onClick="reset()">Reset</a> -->
-                                </div>
-                            </div>
-                            <div class="col-lg-6 ">
-                                <div class="row">
-                                <h1 class="text-white" id="stopWatchDisplay"> </h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -153,7 +138,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticWaktu" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -172,6 +157,23 @@
     </div>
   </div>
 </div>
+
+                                </div>
+                                <div class="mt-5">
+                                  <!-- <a href="#" class="btn btn-white my-2" data-scroll-to data-scroll-to-offset="85" id="startPause" onClick="startPause()">Start</a> 
+                                  <a href="#" class="btn btn-outline-white my-2" onClick="reset()">Reset</a> -->
+                                </div>
+                            </div>
+                            <div class="col-lg-6 ">
+                                <div class="row">
+                                <h1 class="text-white" id="stopWatchDisplay"> </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     
         
@@ -214,9 +216,9 @@
                     if(secs<10){
                         secs = "0" + secs;
                     }
-                    if(mins == 45){
+                    if(mins == 01){
 
-                        $('#staticBackdrop').modal('show');
+                        $('#staticWaktu').modal('show');
                     }
                     document.getElementById("stopWatchDisplay").innerHTML = mins+ ":" +secs+ ":" + "0" +tenths;
                     increment();
