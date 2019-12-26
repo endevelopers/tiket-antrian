@@ -106,7 +106,6 @@
                                         <button class="btn btn-warning" onClick="reset()"><i class="glyphicon glyphicon-refresh"></i> Reset</button>
                                     </div> -->
 
-                                    <a class="btn btn-sm d-none d-lg-inline-block btn-warning ml-auto"  href="<?= base_url() ?>main/show_finish"> <i class="fa fa-check"></i> Done</a>
 
                                 </div>
                                 <div class="mt-5">
@@ -125,7 +124,24 @@
             </div>
         </section>
 
+        
+        <?
+
+            for ($i=1; $i < 10; $i++) {
+                # code...
+                ?>
+                    <audio id="<?= $i ?>">
+                        <source src="https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/<?= $i ?>.wav" type="audio/wav">
+                    </audio>
+                <?
+            }
+
+        ?>
+
     
+
+        <!-- <button onclick="playAudio(7)" type="button">Play Audio</button> -->
+
         
         <script src="<?= base_url() ?>asset/assets/libs/jquery/dist/jquery.min.js"> </script> 
         <script src="<?= base_url() ?>asset/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"> </script> 
@@ -141,34 +157,43 @@
         <script src="<?= base_url() ?>asset/assets/js/quick-website.js"> </script> 
             
         <script>
+
             feather.replace({
                 width: "1em",
                 height: "1em"
             })
+
         </script>
         
         <script type="text/javascript" src="<?= base_url() ?>asset/js/timer.js"></script>
 
         <script>
-            function checkAvailability() {
 
-                var tiket_id = 0;
+            var tiket = [];
+            function checkAvailability() {
 
                 jQuery.ajax({
                 url: "<?= base_url() ?>api/board",
                     // data:'username='+$("#username").val(),
                     type: "POST",
                     success:function(data){
+
                         // console.log(data)
-                        var tiket_id = data.tiket_id ;
+                        // run_audio(tiket_no)
+
+                        var loket_no = data.loket_no ;
+                        var tiket_no = data.tiket_no ;
+
+                        if(tiket[0] != data.tiket_no){
+                            // console.log( data.tiket_no)
+                            playAudio(data.tiket_no)
+                        }
+
+                        tiket[0] = data.tiket_no ;
                         
-                        if(tiket_id != data.tiket_id){
-
-                            run_audio(data.tiket_no)
-
-                        } 
-                        $('#loket_no').text(data.loket_no)
-                        $('#tiket_no').text(data.tiket_no)
+                
+                        $('#loket_no').text(loket_no)
+                        $('#tiket_no').text(tiket_no)
                     },
                     
                     error:function () {
@@ -176,13 +201,11 @@
                     }
 
                 });
+                
                 freshAtrian()
 
             }
-
-            function run_audio(tiket_no ){
-                console.log('audio '+tiket_no);
-            }
+            
 
             function freshAtrian(){
 
@@ -194,6 +217,20 @@
             })
             
         </script>
+
+
+        <script>
+
+            function playAudio(tiket_no) { 
+
+                var x = document.getElementById(tiket_no); 
+                x.play();
+
+            } 
+
+
+        </script>
+
        
         
     </body>
