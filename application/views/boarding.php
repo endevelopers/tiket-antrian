@@ -125,22 +125,41 @@
         </section>
 
         
-        <?
 
-            for ($i=1; $i < 10; $i++) {
-                # code...
-                ?>
-                    <audio id="<?= $i ?>">
-                        <source src="https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/<?= $i ?>.wav" type="audio/wav">
-                    </audio>
-                <?
-            }
 
-        ?>
+        <!-- ------------------ -->
 
-    
 
-        <!-- <button onclick="playAudio(7)" type="button">Play Audio</button> -->
+        <audio id="nommor-urut">
+            <source src="https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/nommor-urut.wav" type="audio/wav">
+        </audio>
+
+        <audio id="sepuluh">
+            <source src="https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/sepuluh.wav" type="audio/wav">
+        </audio>
+
+
+        <!-- ------------------ -->
+
+        <audio id="sepuluh">
+            <source src="https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/sepuluh.wav" type="audio/wav">
+        </audio>
+        <audio id="sebelas">
+            <source src="https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/sebelas.wav" type="audio/wav">
+        </audio>
+
+        <audio id="belas">
+            <source src="https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/belas.wav" type="audio/wav">
+        </audio>
+        <audio id="puluh">
+            <source src="https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/puluh.wav" type="audio/wav">
+        </audio>
+        <audio id="seratus">
+            <source src="https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/seratus.wav" type="audio/wav">
+        </audio>
+
+
+        <button onclick="playAudio('30', 2)" type="button">Play Audio</button>
 
         
         <script src="<?= base_url() ?>asset/assets/libs/jquery/dist/jquery.min.js"> </script> 
@@ -170,6 +189,7 @@
         <script>
 
             var tiket = [];
+            
             function checkAvailability() {
 
                 jQuery.ajax({
@@ -186,7 +206,9 @@
 
                         if(tiket[0] != data.tiket_no){
                             // console.log( data.tiket_no)
-                            playAudio(data.tiket_no)
+
+                            playAudio(String(data.tiket_no), data.loket_no)
+
                         }
 
                         tiket[0] = data.tiket_no ;
@@ -221,13 +243,114 @@
 
         <script>
 
-            function playAudio(tiket_no) { 
+            function playAudio(tiket_no, loket_no) { 
 
-                var x = document.getElementById(tiket_no); 
-                x.play();
+                // if(tiket_no > 10 ){
 
+                //     var x = document.getElementById(tiket_no); 
+
+                // } else {
+
+                //     var x = document.getElementById(tiket_no); 
+
+                // }
+
+                // x.play();
+
+                var nomor_urut = new Audio('https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/nomor-urut.wav'); 
+                var loket = new Audio('https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/loket.wav'); 
+
+                var loket_no = new Audio('https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/'+loket_no+'.wav'); 
+                
+
+                var belas = new Audio('https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/belas.wav'); 
+                var puluh = new Audio('https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/puluh.wav'); 
+                var seratus = new Audio('https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/seratus.wav'); 
+
+
+
+
+                var audio = function() {
+
+                    if(tiket_no < 10){
+
+                        var tiket = new Audio('https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/'+tiket_no+'.wav'); 
+
+                        setTimeout(function(){ nomor_urut.play(); }, 1000);
+                        setTimeout(function(){ tiket.play(); }, 2000);
+                        setTimeout(function(){ loket.play(); }, 3000);
+                        setTimeout(function(){ loket_no.play(); }, 4000);
+
+                    }
+
+                    else if(tiket_no == 10){
+                                
+                        var sepuluh = new Audio('https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/sepuluh.wav'); 
+
+                        setTimeout(function(){ nomor_urut.play(); }, 1000);
+                        setTimeout(function(){ sepuluh.play(); }, 2000);
+                        setTimeout(function(){ loket.play(); }, 3000);
+                        setTimeout(function(){ loket_no.play(); }, 4000);
+
+                    }
+
+                    else if(tiket_no == 11){
+
+                        var sebelas = new Audio('https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/sebelas.wav'); 
+
+                        setTimeout(function(){ nomor_urut.play(); }, 1000);
+                        setTimeout(function(){ sebelas.play(); }, 2000);
+                        setTimeout(function(){ loket.play(); }, 3000);
+                        setTimeout(function(){ loket_no.play(); }, 4000);
+
+                    }
+
+                    else if(tiket_no > 11 && tiket_no < 20 ){
+
+                        var last = tiket_no.substring(2,1)
+                        console.log(last)
+
+                        var tiket_last = new Audio('https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/'+last+'.wav'); 
+
+                        setTimeout(function(){ nomor_urut.play(); }, 1000);
+
+                        setTimeout(function(){ tiket_last.play(); }, 2000);
+                        setTimeout(function(){ belas.play(); }, 2400);
+
+                        setTimeout(function(){ loket.play(); }, 4000);
+                        setTimeout(function(){ loket_no.play(); }, 5000);
+
+                    }
+
+                    else if (tiket_no > 19 && tiket_no < 100){
+
+                        var last = tiket_no.substring(2,1)
+                        var one = tiket_no.substring(1,0)
+                        console.log(last)
+                        console.log(one)
+
+                        var tiket_last = new Audio('https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/'+last+'.wav'); 
+                        var tiket_one = new Audio('https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/'+one+'.wav'); 
+
+                        setTimeout(function(){ nomor_urut.play(); }, 1000);
+
+                        setTimeout(function(){ tiket_one.play(); }, 2000);
+                        setTimeout(function(){ puluh.play(); }, 2400);
+                        if(last > 0 ){
+
+                            setTimeout(function(){ tiket_last.play(); }, 2700);
+                        }
+
+                        setTimeout(function(){ loket.play(); }, 4000);
+                        setTimeout(function(){ loket_no.play(); }, 5000);
+
+                    }
+
+
+
+                }
+                audio();
             } 
-
 
         </script>
 
