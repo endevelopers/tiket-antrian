@@ -42,6 +42,32 @@ class Api extends CI_Controller {
 		echo json_encode($tiket_board); 
 
     }
+
+
+    public function panggil_ulang(){
+
+        $panggil_ulang = $this->LoketModel->panggil_ulang($tiket_id);
+
+        $tiket_board = array();
+        foreach ($panggil_ulang->result() as $key => $value) {
+            # code...
+            $tiket_board = $value ;
+        }
+
+		header('Content-Type: application/json');
+        echo json_encode($tiket_board); 
+        
+    }
+
+    public function callback_board(){
+
+        $data['tiket_id'] = $_POST['tiket_id'];
+        $callback = $this->LoketModel->add_board($data);
+
+		header('Content-Type: application/json');
+        echo $callback ;
+
+    }
     
 	
 }

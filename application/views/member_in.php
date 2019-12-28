@@ -122,10 +122,7 @@
                                         
                                         <tbody class="text-white"> 
 
-                                        <?
-                                            foreach ($antrian->result() as $value) {
-                                                # code...
-                                        ?>
+                                        <?  foreach ($antrian->result() as $value) {   ?>
 
                                             <tr>
                                                 <td><?= $value->tiket_no ?></td>
@@ -138,10 +135,23 @@
                                         <? } ?>
 
                                         </tbody>
+
                                     </table>
 
-                                    
-                                    <a href="<?= base_url() ?>kasir/next" class="btn btn-warning my-2 float-right" >Next</a>
+                                    <style>
+                                        .hide-alert{
+                                            display:none ;
+                                        }
+                                    </style>
+
+                                    <div class="alert alert-success hide-alert" role="alert" id="alertCallback">
+                                        Sedang Memanggil Tiket No <?= $tiket_no ?> di Loket <?= $loket_no ?>
+                                    </div>
+
+
+                                    <button type="button" id="panggil_ulang" data-id="<?= $tiket_id ?>" class="btn btn-info my-2 btn-sm float-left" >Panggil Ulang</button>
+                                    <a href="<?= base_url() ?>kasir/next" class="btn btn-warning my-2 btn-sm float-right" >Next</a>
+
                                 </div>
                             </div>
                         
@@ -171,6 +181,43 @@
         </script>
         
         <script type="text/javascript" src="<?= base_url() ?>asset/js/timer.js"></script>
+
+        <script>
+
+            $( document ).ready(function() {
+                $('#panggil_ulang').on('click', function(){
+
+                    jQuery.ajax({
+
+                        url: "<?= base_url() ?>api/callback_board",
+                        data:'tiket_id='+$(this).data('id'),
+                        type: "POST",
+                        success:function(data){
+
+                            console.log(data);
+                            if(data == 1){
+
+                                $('#alertCallback').removeClass('hide-alert');
+
+                                setTimeout(function(){ 
+
+                                    $('#alertCallback').addClass('hide-alert');
+
+                                }, 5000);
+                            }
+                            
+                        },
+                        error:function() {
+
+                        }
+                    })
+                });
+
+            });
+
+        </script>
+
+
     </body>
 
 

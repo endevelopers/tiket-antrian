@@ -257,6 +257,7 @@ class Kasir extends CI_Controller {
         // var_dump($d);
 
         $data['antrian'] = $this->LoketModel->list_antrian();
+        $data['tiket_id'] = $this->session->userdata('tiket_id');
 
         $this->load->view('member_in', $data);
     }

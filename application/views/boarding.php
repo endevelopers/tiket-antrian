@@ -124,8 +124,6 @@
             </div>
         </section>
 
-        
-
 
         <!-- ------------------ -->
 
@@ -190,6 +188,7 @@
 
             var tiket = [];
             
+            
             function checkAvailability() {
 
                 jQuery.ajax({
@@ -224,18 +223,50 @@
 
                 });
                 
-                freshAtrian()
+                
+                setTimeout(function(){ checkAvailability(); }, 1000);
 
             }
             
+            var board = [];
 
-            function freshAtrian(){
+            function callback(){
 
-                setTimeout(function(){ checkAvailability() }, 1000);
+                jQuery.ajax({
+                url: "<?= base_url() ?>api/panggil_ulang",
+                    // data:'username='+$("#username").val(),
+                    type: "POST",
+                    success:function(data){
+
+                        // console.log(data)
+                        // run_audio(tiket_no)
+
+                        if(board[0] != data.board_id){
+                            // console.log( data.tiket_no)
+
+                            playAudio(String(data.tiket_no), data.loket_no)
+                            console.log(data)
+                        }
+
+                        board[0] = data.board_id ;
+                        
+                
+                    },
+                    
+                    error:function () {
+
+                    }
+
+                });
+
+                setTimeout(function(){ callback(); }, 1000);
+                
             }
 
-            $( document ).ready( checkAvailability() ,function() {
 
+            $( document ).ready(function() { 
+                checkAvailability() ;
+                callback();
             })
             
         </script>
@@ -308,14 +339,13 @@
                     if(tiket_no > 11 && tiket_no < 20 ){
 
                         var last = tiket_no.substring(2,1)
-                        console.log(last)
 
                         var tiket_last = new Audio('https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/'+last+'.wav'); 
 
                         setTimeout(function(){ nomor_urut.play(); }, 1000);
 
                         setTimeout(function(){ tiket_last.play(); }, 2000);
-                        setTimeout(function(){ belas.play(); }, 2400);
+                        setTimeout(function(){ belas.play(); }, 2500);
 
                         setTimeout(function(){ loket.play(); }, 4000);
                         setTimeout(function(){ loket_no.play(); }, 5000);

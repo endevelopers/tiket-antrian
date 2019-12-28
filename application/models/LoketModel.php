@@ -61,6 +61,7 @@ class LoketModel extends CI_Model {
         $this->db->order_by('tiket_id', 'ASC');
         $this->db->limit(1);
         return $this->db->get('antrian');
+
     }
 
     public function list_antrian(){
@@ -70,6 +71,19 @@ class LoketModel extends CI_Model {
         return $this->db->get('antrian');
 
 
+    }
+
+    public function panggil_ulang(){
+        
+        $this->db->join('tiket', 'board.tiket_id = tiket.tiket_id');
+        $this->db->order_by('board_id', 'DESC');
+        $this->db->limit(1);
+
+        return $this->db->get('board');
+    }
+
+    public function add_board($data){
+        return $this->db->insert('board', $data);
     }
 
 }
