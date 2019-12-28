@@ -16,7 +16,11 @@ class Kasir extends CI_Controller {
         $this->load->model('TiketModel');
 		
 		ini_set('display_error','off');
-		error_reporting(0);
+        error_reporting(0);
+        
+        if($this->session->userdata('role') == 1){
+            redirect(base_url().'admin');
+        }
 
 	}
 
@@ -47,6 +51,7 @@ class Kasir extends CI_Controller {
         $data['telp'] = $this->input->post('telp');
         $data['alamat'] = $this->input->post('alamat');
 
+        $tiket_id = $this->session->userdata('tiket_id');
 
         $main['users_id'] = $this->MainModel->add_user($data);
         $main['main_id'] = $this->MainModel->add_main($main['users_id'] , $tiket_id);
@@ -251,7 +256,19 @@ class Kasir extends CI_Controller {
         }
         // var_dump($d);
 
+        $data['antrian'] = $this->LoketModel->list_antrian();
+
         $this->load->view('member_in', $data);
+    }
+
+    public function antrian_delete(){
+
+        $tiket_id = $this->uri->segment(3);
+
+        $this->LoketModel->delete_antrian($tiket_id) ;
+
+        redirect(base_url().'kasir/member_in_view');
+
     }
 	
 }

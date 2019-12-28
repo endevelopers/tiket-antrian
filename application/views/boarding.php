@@ -159,7 +159,7 @@
         </audio>
 
 
-        <button onclick="playAudio('30', 2)" type="button">Play Audio</button>
+        <!-- <button onclick="playAudio('30', 2)" type="button">Play Audio</button> -->
 
         
         <script src="<?= base_url() ?>asset/assets/libs/jquery/dist/jquery.min.js"> </script> 
@@ -283,7 +283,7 @@
 
                     }
 
-                    else if(tiket_no == 10){
+                    if(tiket_no == 10){
                                 
                         var sepuluh = new Audio('https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/sepuluh.wav'); 
 
@@ -294,7 +294,7 @@
 
                     }
 
-                    else if(tiket_no == 11){
+                     if(tiket_no == 11){
 
                         var sebelas = new Audio('https://raw.githubusercontent.com/endevelopers/tiket-antrian/master/asset/rekaman/sebelas.wav'); 
 
@@ -305,7 +305,7 @@
 
                     }
 
-                    else if(tiket_no > 11 && tiket_no < 20 ){
+                    if(tiket_no > 11 && tiket_no < 20 ){
 
                         var last = tiket_no.substring(2,1)
                         console.log(last)
@@ -322,7 +322,7 @@
 
                     }
 
-                    else if (tiket_no > 19 && tiket_no < 100){
+                    if (tiket_no > 19 && tiket_no < 100){
 
                         var last = tiket_no.substring(2,1)
                         var one = tiket_no.substring(1,0)

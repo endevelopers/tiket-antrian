@@ -98,16 +98,50 @@
                                 <h1 class="display-4 text-white mb-4">Tiket <strong class="text-warning"> <?= $tiket_no ?> </strong></h1>
                                 <h1 class="display-4 text-white mb-4">Loket <strong class="text-warning"> <?= $loket_no ?> </strong></h1>
 
+                                <a href="<?= base_url()?>kasir/member_in" class="btn btn-outline-white my-2 float-left" >Masuk</a>
+
                             </div>
                             
                             <div class="col-lg-6 pr-lg-5">
                                 
                                 <?= !$this->session->flashdata('alert') ? '' : '<div class="alert alert-warning" role="alert">'.$this->session->flashdata('alert').'</div>' ?>
-                        
+
                                 <div class="mt-5">
-                                    <a href="<?= base_url()?>kasir/member_in" class="btn btn-outline-white my-2 float-right" >Masuk</a>
+                                    <h5 class="text-white">List Antrian </h5>
+                                    <table class="table ">
+                                        <thead>
+
+                                            <tr class="bg-warning text-dark">
+
+                                                <th scope="col"> <b>Tiket No</b> </th>
+                                                <th scope="col"> <b>Loket No</b> </th>
+                                                <th scope="col"> <b>Tools</b> </th>
+
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody class="text-white"> 
+
+                                        <?
+                                            foreach ($antrian->result() as $value) {
+                                                # code...
+                                        ?>
+
+                                            <tr>
+                                                <td><?= $value->tiket_no ?></td>
+                                                <td><?= $value->loket_no ?></td>
+                                                <td>
+                                                    <a href="<?= base_url() ?>kasir/antrian_delete/<?= $value->tiket_id ?>" class="text-white"> <i class="fa fa-trash"></i> </a>
+                                                </td>
+                                            </tr>
+
+                                        <? } ?>
+
+                                        </tbody>
+                                    </table>
+
                                     
-                                    <a href="<?= base_url() ?>kasir/next" class="btn btn-warning my-2 float-left" >Next</a>
+                                    <a href="<?= base_url() ?>kasir/next" class="btn btn-warning my-2 float-right" >Next</a>
                                 </div>
                             </div>
                         

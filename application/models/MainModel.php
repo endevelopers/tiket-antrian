@@ -175,5 +175,13 @@ class MainModel extends CI_Model {
         
     }
 
+    public function data_main(){
+
+        $this->db->join('tiket', 'main.tiket_id = tiket.tiket_id');
+        $this->db->join('users', 'main.users_id = users.users_id');
+        return $this->db->get('main');
+
+    }
+
 
 }

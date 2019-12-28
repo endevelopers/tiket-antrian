@@ -166,7 +166,9 @@
                             </div>
                             <div class="col-lg-6 ">
                                 <div class="row">
-                                <h1 class="text-white" id="stopWatchDisplay"> </h1>
+                                <h1 class="text-white" id="tampilkan"> </h1>
+
+                                <!-- <div id='tampilkan'></div> -->
                                 </div>
                             </div>
                         </div>
@@ -197,41 +199,34 @@
             })
         </script>
         
-        <script>
+       
 
-            var time = 0;
-            var loop_all = 45;
+<script>
 
-            function increment(){
-                
-                setTimeout(function(){
-                    time++;
-                    var mins = Math.floor(time/10/60)%60;
-                    var secs = Math.floor(time/10)%60;
-                    var tenths = time%10;
-                    
-                    if(mins<10){
-                        mins = "0" + mins;
-                    }
-                    if(secs<10){
-                        secs = "0" + secs;
-                    }
-                    if(mins == 01){
+    $(document).ready(function() {
 
-                        $('#staticWaktu').modal('show');
-                    }
-                    document.getElementById("stopWatchDisplay").innerHTML = mins+ ":" +secs+ ":" + "0" +tenths;
-                    increment();
-                },100);
-
+        var detik = 0;
+        var menit = 45;
+        function hitung() {
+            setTimeout(hitung,1000);
+                $('#tampilkan').html(  menit + ' : ' + detik );
+                detik --;
+                if(detik < 0) {
+                    detik = 59;
+                    menit --;
+                if(menit < 0) {
+                    menit = 0;
+                    detik = 0;
+                }
+                if(detik == 0){
+                    $('#staticWaktu').modal('show');
+                    menit = 45;
+                }
             }
-            
-
-            $( document ).ready( increment() ,function() {
-
-            })
-            
-        </script>
+        }
+        hitung();
+    });
+</script>
        
         
     </body>

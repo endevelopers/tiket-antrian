@@ -6,6 +6,12 @@ date_default_timezone_set('Asia/Jakarta');
 
 class LoketModel extends CI_Model {
 
+
+    public function data_loket(){
+        $this->db->join('account', 'loket.account_id = account.account_id');
+        return $this->db->get('loket');
+    }
+
     public function off(){
         $this->db->where('status', 0);
         return $this->db->get('loket');
@@ -55,6 +61,15 @@ class LoketModel extends CI_Model {
         $this->db->order_by('tiket_id', 'ASC');
         $this->db->limit(1);
         return $this->db->get('antrian');
+    }
+
+    public function list_antrian(){
+
+        $this->db->join('tiket', 'antrian.tiket_id = tiket.tiket_id');
+        $this->db->order_by('antrian_id', 'ASC');
+        return $this->db->get('antrian');
+
+
     }
 
 }

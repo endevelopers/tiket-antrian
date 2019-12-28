@@ -78,19 +78,24 @@ class User extends CI_Controller {
                 foreach ($data_login->result() as $key => $row) {
                     # code...
                     $login_data['account_id'] = $row->account_id ;
-                    $login_data['name'] = $row->name ;
+                    $login_data['nama'] = $row->nama ;
                     $login_data['email'] = $row->email ;
                     $login_data['password'] = $row->password ;
                     $login_data['role'] = $row->role ;
                 }
                 
                 $this->session->set_userdata($login_data);
+                if($this->session->userdata('role') > 0){
+
+                    redirect(base_url().'admin');
+
+                }
+
                 redirect(base_url().'kasir');
 
                 // var_dump($login_data);
 
             }
-            
         }
         
         $this->load->view('login');
